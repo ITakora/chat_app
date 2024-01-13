@@ -1,18 +1,17 @@
-import 'package:chat/screens/signup_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 final firebase = FirebaseAuth.instance;
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
   final _form = GlobalKey<FormState>();
 
   var _enteredEmail = '';
@@ -27,9 +26,8 @@ class _LoginScreenState extends State<LoginScreen> {
     }
     _form.currentState!.save();
     try {
-      final loginUser = await firebase.signInWithEmailAndPassword(
+      final newUser = await firebase.createUserWithEmailAndPassword(
           email: _enteredEmail, password: _enteredPassword);
-      print(loginUser);
     } on FirebaseAuthException catch (err) {
       if (err.message == null) {
         return;
@@ -151,7 +149,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     width: 200,
                     height: 50,
                     child: ElevatedButton(
-                        onPressed: _submitButton, child: const Text('Sign In')),
+                        onPressed: _submitButton, child: const Text('Sign Up')),
                   ),
                   const SizedBox(
                     height: 10,
@@ -159,16 +157,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text('Dont have a account ?'),
+                      const Text('Have Account ?'),
                       TextButton(
                           onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const SignUpScreen(),
-                                ));
+                            Navigator.pop(context);
                           },
-                          child: const Text('Sign Up'))
+                          child: const Text('Sign In'))
                     ],
                   )
                 ],
