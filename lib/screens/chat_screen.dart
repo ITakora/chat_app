@@ -7,6 +7,9 @@ class ChatScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Chat App'),
+      ),
       body: Center(
           child: TextButton(
               onPressed: () {
