@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 final firebase = FirebaseAuth.instance;
 
@@ -25,9 +26,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
       return;
     }
     _form.currentState!.save();
+
     try {
       final newUser = await firebase.createUserWithEmailAndPassword(
           email: _enteredEmail, password: _enteredPassword);
+      EasyLoading.showSuccess('Your SignUp is Successfully');
+      Navigator.pop(context);
     } on FirebaseAuthException catch (err) {
       if (err.message == null) {
         return;
@@ -69,9 +73,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
         child: Column(
           children: [
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 18),
+              padding: const EdgeInsets.symmetric(horizontal: 10),
               width: 180,
-              child: Image.asset('assets/images/chat.png'),
+              child: Text(
+                'Sign Up',
+                style: Theme.of(context)
+                    .textTheme
+                    .displaySmall!
+                    .copyWith(color: Colors.black),
+              ),
             ),
             const SizedBox(
               height: 18,

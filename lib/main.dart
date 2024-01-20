@@ -1,9 +1,11 @@
 import 'package:chat/screens/chat_screen.dart';
+import 'package:chat/screens/loading_screen.dart';
 import 'package:chat/screens/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 
@@ -34,6 +36,9 @@ class MyApp extends StatelessWidget {
       home: StreamBuilder(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const LoadingScreen();
+          }
           if (snapshot.hasData) {
             return const ChatScreen();
           } else {
@@ -41,6 +46,7 @@ class MyApp extends StatelessWidget {
           }
         },
       ),
+      builder: EasyLoading.init(),
     );
   }
 }

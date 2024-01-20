@@ -8,14 +8,14 @@ class ChatScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Chat App'),
+        title: const Text('Chat App'),
       ),
       body: Center(
           child: TextButton(
               onPressed: () {
                 FirebaseAuth.instance.signOut();
               },
-              child: Text('Log Out'))),
+              child: const Text('Log Out'))),
     );
   }
 }

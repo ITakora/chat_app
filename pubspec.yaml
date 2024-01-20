@@ -33,7 +33,9 @@ dependencies:
   firebase_core: ^2.24.2
   flutter:
     sdk: flutter
+  flutter_easyloading: ^3.0.5
   google_fonts: ^5.1.0
+  loading_animation_widget: ^1.2.0+4
   lottie: ^2.6.0
 
 dev_dependencies:
