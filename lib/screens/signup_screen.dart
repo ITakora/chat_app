@@ -31,7 +31,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
       final newUser = await firebase.createUserWithEmailAndPassword(
           email: _enteredEmail, password: _enteredPassword);
       EasyLoading.showSuccess('Your SignUp is Successfully');
-      Navigator.pop(context);
     } on FirebaseAuthException catch (err) {
       if (err.message == null) {
         return;

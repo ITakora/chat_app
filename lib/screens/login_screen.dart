@@ -1,4 +1,5 @@
 import 'package:chat/screens/signup_screen.dart';
+import 'package:chat/widgets/google_signin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -166,6 +167,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                 _submitButton();
                               },
                               child: const Text('Sign In')),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        const Center(
+                          child: SignInGoogle(),
                         ),
                         const SizedBox(
                           height: 10,

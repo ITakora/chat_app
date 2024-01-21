@@ -14,7 +14,7 @@
       },
       "oauth_client": [
         {
-          "client_id": "147075807338-9lt0fmk9hfmk2anq3qgtk997npsi63oj.apps.googleusercontent.com",
+          "client_id": "147075807338-rk3cpge65r1mgkkhr40rrca7nqboaa4a.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -29,6 +29,13 @@
             {
               "client_id": "147075807338-9lt0fmk9hfmk2anq3qgtk997npsi63oj.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "147075807338-2rteqn21m3l9u0kb86835hdqq05lnu7h.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.chat.RunnerTests"
+              }
             }
           ]
         }
