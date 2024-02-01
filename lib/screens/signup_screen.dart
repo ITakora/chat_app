@@ -1,3 +1,8 @@
+import 'dart:io';
+
+import 'package:chat/widgets/google_signin.dart';
+import 'package:chat/widgets/user_image_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -19,6 +24,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   var _enteredPassword = '';
   String? _errorMessage;
   late FocusNode myFocusNode;
+  File? userImage;
 
   void _submitButton() async {
     final valid = _form.currentState!.validate();
@@ -30,6 +36,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
     try {
       final newUser = await firebase.createUserWithEmailAndPassword(
           email: _enteredEmail, password: _enteredPassword);
+
+      final storageImage = FirebaseStorage.instance
+          .ref()
+          .child('user_image')
+          .child('${newUser.user!.uid}.jpg');
+
+      await storageImage.putFile(userImage!);
+      final imageUrl = await storageImage.getDownloadURL();
+      print(imageUrl);
+
       EasyLoading.showSuccess('Your SignUp is Successfully');
     } on FirebaseAuthException catch (err) {
       if (err.message == null) {
@@ -90,6 +106,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
+                  UserImagePicker(
+                    onPickImage: (pickedImage) {
+                      userImage = pickedImage;
+                    },
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
                   Form(
                     key: _form,
                     child: Column(
@@ -160,6 +184,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     child: ElevatedButton(
                         onPressed: _submitButton, child: const Text('Sign Up')),
                   ),
+                  // const SizedBox(
+                  //   height: 20,
+                  // ),
+                  // const Center(
+                  //   child: SignInGoogle(),
+                  // ),
                   const SizedBox(
                     height: 10,
                   ),

@@ -8,6 +8,8 @@ class SignInGoogle extends StatelessWidget {
 
   Future<UserCredential> _signInWithGoogle() async {
     // Trigger the authentication flow
+
+    FirebaseAuth auth = FirebaseAuth.instance;
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
     // Obtain the auth details from the request
@@ -20,8 +22,16 @@ class SignInGoogle extends StatelessWidget {
       idToken: googleAuth?.idToken,
     );
 
+    final UserCredential authResult =
+        await auth.signInWithCredential(credential);
+    final User? user = authResult.user;
+    if (authResult.additionalUserInfo!.isNewUser) {
+      if (user != null) {
+        return authResult;
+      }
+    } else {}
     // Once signed in, return the UserCredential
-    return await FirebaseAuth.instance.signInWithCredential(credential);
+    return authResult;
   }
 
   @override

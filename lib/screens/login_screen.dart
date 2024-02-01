@@ -30,12 +30,13 @@ class _LoginScreenState extends State<LoginScreen> {
       return;
     }
     _form.currentState!.save();
-    setState(() {
-      _isloading = true;
-    });
+
     try {
       final loginUser = await firebase.signInWithEmailAndPassword(
           email: _enteredEmail, password: _enteredPassword);
+      setState(() {
+        _isloading = true;
+      });
     } on FirebaseAuthException catch (err) {
       if (err.message == null) {
         return;

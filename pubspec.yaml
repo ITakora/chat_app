@@ -31,11 +31,15 @@ dependencies:
   cupertino_icons: ^1.0.2
   firebase_auth: ^4.16.0
   firebase_core: ^2.24.2
+  firebase_storage: ^11.6.0
   flutter:
     sdk: flutter
   flutter_easyloading: ^3.0.5
   google_fonts: ^5.1.0
   google_sign_in: ^6.1.6
+  image_picker: ^1.0.7
+  image_picker_android: ^0.8.9+3
+  image_picker_platform_interface: ^2.9.3
   loading_animation_widget: ^1.2.0+4
   lottie: ^2.6.0
   sign_button: ^2.0.6
